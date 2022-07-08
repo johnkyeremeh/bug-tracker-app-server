@@ -1,8 +1,8 @@
 class ApplicationController < ActionController::API
 # require "Auth"
-
+before_action :authorized
  
-#     skip_before_action :authorized, only: [:create]
+
 
     def encode_token(payload)
         JWT.encode(payload, ENV["app_secret_key"])
@@ -30,10 +30,13 @@ class ApplicationController < ActionController::API
 
     def current_user
         if decoded_token
-          # decoded_token=> [{"user_id"=>2}, {"alg"=>"HS256"}]
-          # or nil if we can't decode the token
-          user_id = decoded_token[0]['user_id']
-          @user = User.find_by(id: user_id)
+            decoded_hash = decoded_token
+            if !decoded_hash.empty?
+                user_id = decoded_hash[0]['user_id']
+                @user = User.find_by(id: user_id)
+            else
+                nil
+            end
         end
     end
 
@@ -42,10 +45,8 @@ class ApplicationController < ActionController::API
     end
 
 
-def authorized
-    unless logged_in?
-      render json: { message: 'Please log in' }, status: :unauthorized
+    def authorized
+            render json: { message: 'Please log in' }, status: :unauthorized unless logged_in?
     end
-  end
 
 end

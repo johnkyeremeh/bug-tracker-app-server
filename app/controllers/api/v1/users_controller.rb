@@ -5,13 +5,19 @@ class Api::V1::UsersController < ApplicationController
 
         #if user is saved then render message and user 
         if user.save 
-            render json: {token: Auth.create_token(user)}
+            payload = user
+            token = encode_token(payload)
+            render json: {
+                status: :created,
+                user: user,
+                jwt: token
+            }
+            # render json: {token: Auth.create_token(user)}
         else 
             render json: { errors: user.errors.full_messages}, status: 500
         end
     end
-
-
+    
 
 
     # skip_before_action :authorized, only: [:create]

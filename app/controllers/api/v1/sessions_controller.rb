@@ -7,7 +7,13 @@ class Api::V1::SessionsController < ApplicationController
         user = User.find_by(email: params[:email])
 
         if user && user.authenticate(params[:password])
-            render json: {token: Auth.create_token({username: user.username,id: user.id, email: user.email })}
+            payload = {user_id: user.id}
+            token = encode_token(payload)
+            render json: {
+                user: user,
+                jwt: token,
+                success: "Welcome back, #{user.username}!"
+            }
         else 
             render json: { message: "Unable to find a user with that email or pasword"}, status: 500
         end

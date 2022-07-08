@@ -1,4 +1,13 @@
 class ApplicationController < ActionController::API
+require "Auth"
+
+    # def index
+    #     if Auth.decode_token(some_attribute)
+    #         render {messages: "LIST"}
+    #     else 
+    #         render json: { error: {message: "You must have a valid token!"}}, status: 500
+    #     end
+    # end
     # skip_before_action :authorized, only: [:create]
 
     # def encode_token(payload)

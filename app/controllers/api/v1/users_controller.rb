@@ -1,6 +1,15 @@
 class Api::V1::UsersController < ApplicationController
 
     skip_before_action :authorized, only: [:signup]
+    skip_before_action :authorized, only: [:index]
+
+    #delete me later
+    def index
+        users = User.all
+        render json: {
+                user: users}
+    end
+
 
     def signup 
         user = User.new(user_params)

@@ -1,5 +1,7 @@
 class Api::V1::BugsController < ApplicationController
 
+    skip_before_action :authorized, only: [:index]
+    
     def index
         token = auth_header
  

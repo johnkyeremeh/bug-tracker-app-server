@@ -56,3 +56,7 @@ gem "table_print"
 
 #secure sensative information
 gem "figaro"
+
+
+#serializer to control data sent to user 
+gem 'jsonapi-serializer'

@@ -6,8 +6,9 @@ class Api::V1::UsersController < ApplicationController
     #delete me later
     def index
         users = User.all
-        render json: {
-                user: users}
+        users_json =  UserSerializer.new(users).serializable_hash.to_json
+        render json: users_json
+
     end
 
 

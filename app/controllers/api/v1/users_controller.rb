@@ -1,14 +1,13 @@
 class Api::V1::UsersController < ApplicationController
 
-    skip_before_action :authorized, only: [:signup]
-    skip_before_action :authorized, only: [:index]
+    # skip_before_action :authorized, only: [:signup]
+    # skip_before_action :authorized, only: [:index]
 
     #delete me later
     def index
         users = User.all
         users_json =  UserSerializer.new(users).serializable_hash.to_json
         render json: users_json
-
     end
 
 

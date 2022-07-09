@@ -1,12 +1,17 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
+
+      #delete index
       resources :users, only: [:index, :create]
 
       #delete me 
       resources :projects, only: [:index, :create]
 
-      post '/login', to: 'sessions#login'
+      get '/login', to: 'sessions#create'
+      get "/auto_login", to: "sessions#auto_login" 
+      
+      post '/login', to: 'sessions#create'
       post '/signup', to: 'users#signup'
       post "/bugs", to: 'bugs#index'
      

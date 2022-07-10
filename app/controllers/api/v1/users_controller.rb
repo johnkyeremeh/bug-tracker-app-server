@@ -12,18 +12,20 @@ class Api::V1::UsersController < ApplicationController
 
 
     def signup 
+    
         user = User.new(user_params)
+        user_json =  UserSerializer.new(user).serializable_hash
 
+        
         #if user is saved then render message and user 
-        if user.save 
-            payload = user
+        if user.save
+            payload = {user_id: user.id }
             token = encode_token(payload)
             render json: {
                 status: :created,
-                user: user,
+                user: user_json,
                 jwt: token
             }
-            # render json: {token: Auth.create_token(user)}
         else 
             render json: { errors: user.errors.full_messages}, status: 500
         end

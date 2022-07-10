@@ -6,12 +6,28 @@ class ApplicationController < ActionController::API
 
 # require "Auth"
 # before_action :authorized
+
+# class Auth 
+
+#     #creates token
+#     def self.create_token(user_object)
+#         payload = {user: JSON.parse(user_object.to_json)}
+#         token = JWT.encode(payload, ENV["app_secret_key"], ENV['app_token_algorithm'])
+#     end
+
+
+#     #decodes decode
+#     def self.decode_token(token)
+#         decoded = JWT.decode(token, ENV["app_secret_key"], true,  { algorithm: ENV['app_token_algorithm'] })
+#     end
+
+# end
  
 
 
-    # def encode_token(payload)
-    #     JWT.encode(payload, ENV["app_secret_key"])
-    # end
+    def encode_token(payload)
+        JWT.encode(payload, ENV["app_secret_key"], ENV['app_token_algorithm'])
+    end
 
     # def auth_header
     #     # { 'Authorization': 'Bearer <token>' }

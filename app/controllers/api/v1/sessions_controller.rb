@@ -1,19 +1,23 @@
 require "jwt"
-require "Auth"
+# require "Auth"
 
 class Api::V1::SessionsController < ApplicationController
 
-    # skip_before_action :authorized, only: [:login]
+    # skip_before_action :authorized, only: [:login, :auto_login]
 
         def create 
-            user = User.find_by(username: params[:user][:username])
+
+            
+            user = User.find_by(username: params[:username])
             user_json =  UserSerializer.new(user).serializable_hash
 
      
-            if user && user.authenticate(params[:user][:password])
+            if user && user.authenticate(params[:password])
+                # byebug
                 # session[:user_id] = user.id
                 # byebug
                 payload = {user_id: user.id}
+
                 token = encode_token(payload)
                 render json: {
                     user: user,

@@ -1,11 +1,10 @@
 class ApplicationController < ActionController::API
-    
+    # before_action :authorized
     include ActionController::Cookies
 
 
-
 # require "Auth"
-before_action :authorized
+
 
 # class Auth 
 
@@ -26,7 +25,7 @@ before_action :authorized
 
 
     def encode_token(payload)
-        JWT.encode(payload, ENV["app_secret_key"], ENV['app_token_algorithm'])
+        JWT.encode(payload, ENV["app_secret_key"])
     end
 
     def auth_header
@@ -35,11 +34,11 @@ before_action :authorized
     end
 
     def decoded_token
-        
+
         if auth_header
 
-            token = auth_header
-            # token = auth_header.split(' ')[1]
+            # token = auth_header
+            token = auth_header.split(' ')[1]
             # headers: { 'Authorization': 'Bearer <token>' }
             begin
               JWT.decode(token, ENV["app_secret_key"], true, algorithm: 'HS256')
@@ -64,12 +63,13 @@ before_action :authorized
     end
 
     def logged_in?
+        
         !!current_user
     end
 
 
-    def authorized
-            render json: { message: 'Please log in' }, status: :unauthorized unless logged_in?
-    end
+    # def authorized
+    #         render json: { message: 'Please log in' }, status: :unauthorized unless logged_in?
+    # end
 
 end

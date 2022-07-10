@@ -46,6 +46,10 @@ Rails.application.configure do
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
+  #added in 
+  config.action_dispatch.cookies_same_site_protection = :None; Secure 
+
+
   # Raise exceptions for disallowed deprecations.
   config.active_support.disallowed_deprecation = :raise
 

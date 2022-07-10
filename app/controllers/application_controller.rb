@@ -1,4 +1,9 @@
 class ApplicationController < ActionController::API
+    
+    include ActionController::Cookies
+
+
+
 # require "Auth"
 # before_action :authorized
  
@@ -29,8 +34,7 @@ class ApplicationController < ActionController::API
     # end
 
     def current_user
-      
-        User.find_by(id: session[:user_id])
+        @user = User.find_by(id: session[:user_id])
         # if decoded_token
         #     decoded_hash = decoded_token
         #     if !decoded_hash.empty?
@@ -47,8 +51,8 @@ class ApplicationController < ActionController::API
     end
 
 
-    # def authorized
-    #         render json: { message: 'Please log in' }, status: :unauthorized unless logged_in?
-    # end
+    def authorized
+            render json: { message: 'Please log in' }, status: :unauthorized unless logged_in?
+    end
 
 end

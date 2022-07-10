@@ -60,3 +60,6 @@ gem "figaro"
 
 #serializer to control data sent to user 
 gem 'jsonapi-serializer'
+
+
+gem 'rails_same_site_cookie'

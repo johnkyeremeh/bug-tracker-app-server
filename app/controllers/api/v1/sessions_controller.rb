@@ -7,10 +7,13 @@ class Api::V1::SessionsController < ApplicationController
 
         def create 
     
-        user = User.find_by(username: params[:session] [:username])
 
+        user = User.find_by(username: params[:session] [:username])
+     
             if user && user.authenticate(params[:session][:password])
-                payload = {user_id: user.id}
+                session[:user_id] = user.id
+                # byebug
+                # payload = {user_id: user.id}
                 # token = encode_token(payload)
                 render json: {
                     user: user,

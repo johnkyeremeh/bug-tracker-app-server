@@ -7,7 +7,6 @@ class Api::V1::SessionsController < ApplicationController
 
         def create 
 
-            
             user = User.find_by(username: params[:username])
             user_json =  UserSerializer.new(user).serializable_hash
 
@@ -20,7 +19,7 @@ class Api::V1::SessionsController < ApplicationController
 
                 token = encode_token(payload)
                 render json: {
-                    user: user,
+                    user: user_json,
                     jwt: token,
                     success: "Welcome back, #{user.username}!"
                 }
@@ -28,13 +27,14 @@ class Api::V1::SessionsController < ApplicationController
                 render json: { message: "Unable to find a user with that email or pasword"}, status: 500
             end
         end
-
       
 
         def auto_login
+            
             if current_user
-                render json: current_user
-            else
+                user_json =  UserSerializer.new(current_user).serializable_hash
+                render json: {user: user_json}
+            else 
                 render json: {errors: "No user logged in."}
             end
         end

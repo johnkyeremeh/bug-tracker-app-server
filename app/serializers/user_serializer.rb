@@ -1,7 +1,7 @@
-class UserSerializer
-  include JSONAPI::Serializer
+class UserSerializer 
+  include FastJsonapi::ObjectSerializer
   attributes :username, :email
 
-  has_many :projects
-  has_many :bugs
+  has_many  :projects, serializer: ProjectSerializer
+  has_many :bugs, serializer: BugSerializer
 end

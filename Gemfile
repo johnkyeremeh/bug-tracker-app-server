@@ -46,7 +46,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # Use for handling authentication 
 gem "jwt", "~> 2.4"
 
-gem "active_model_serializers", "~> 0.10.13"
+# gem "active_model_serializers", "~> 0.10.13"
 
 gem "faker", "~> 2.21"
 
@@ -57,9 +57,7 @@ gem "table_print"
 #secure sensative information
 gem "figaro"
 
-
-#serializer to control data sent to user 
-gem 'jsonapi-serializer'
-
+#serializer
+gem 'fast_jsonapi'
 
 gem 'rails_same_site_cookie'

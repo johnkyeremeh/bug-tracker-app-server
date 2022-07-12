@@ -16,6 +16,6 @@ project2 = Project.create(title: "Mobile", description: "New Mobile Design", use
 project3 = Project.create(title: "Mobile", description: "Desktop", user: user1)
 
 
-bug1 = Bug.create(title: "Mobile View Broken", description: "Test", user: user1, project: project1)
-bug2 = Bug.create(title: "Mobile  ", description: "Test", user: user1, project: project1)
-bug3 = Bug.create(title: "Msadsan", description: "Test", user: user1, project: project1)
+bug1 = Bug.create(title: "Mobile View Broken", description: "Test", user: user1, project: project1, status: "Open", priority: "High")
+bug2 = Bug.create(title: "Mobile  ", description: "Test", user: user1, project: project1, status: "Open", priority: "High")
+bug3 = Bug.create(title: "Msadsan", description: "Test", user: user1, project: project1, status: "Open", priority: "High")

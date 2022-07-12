@@ -15,6 +15,8 @@ ActiveRecord::Schema.define(version: 2022_07_08_062716) do
   create_table "bugs", force: :cascade do |t|
     t.string "title"
     t.string "description"
+    t.string "status"
+    t.string "priority"
     t.string "user_type"
     t.integer "user_id"
     t.string "project_type"

@@ -4,12 +4,15 @@ class Api::V1::ProjectsController < ApplicationController
         #delete me later
         def index
             #is there an incoming user_id
-            #but does that matter? do we always want just the current users trips
-            if logged_in? 
-                trips = current_user.trips 
-            else 
-                render json: { message: "You must be in logged in to see your trips"}, status: 500
-            end
+            #but does that matter? do we always want just the current users projects
+         
+                
+                render json: Project.all
+          
+            # else 
+            #     render json: { message: "You must be in logged in to see your bugs"}, status: 500
+            # end
+            
         end
     
     
@@ -26,8 +29,7 @@ class Api::V1::ProjectsController < ApplicationController
                 render json: {
                     status: :created,
                     user: user_json,
-                    jwt: token
-                }
+                    jwt: token}
             else 
                 render json: { errors: user.errors.full_messages}, status: 500
             end

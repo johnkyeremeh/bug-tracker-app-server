@@ -6,16 +6,13 @@ class Api::V1::UsersController < ApplicationController
     #delete me later
     def index
         users = User.all
-        users_json =  UserSerializer.new(users).serializable_hash.to_json
-        render json: users_json
+        render json: UserSerializer.new(users)
     end
 
 
     def signup 
     
         user = User.new(user_params)
-        user_json =  UserSerializer.new(user).serializable_hash
-
         
         #if user is saved then render message and user 
         if user.save
@@ -23,7 +20,7 @@ class Api::V1::UsersController < ApplicationController
             token = encode_token(payload)
             render json: {
                 status: :created,
-                user: user_json,
+                user: UserSerializer.new(user),
                 jwt: token
             }
         else 

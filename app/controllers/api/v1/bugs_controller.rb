@@ -1,23 +1,19 @@
 class Api::V1::BugsController < ApplicationController
-
-    # skip_before_action :authorized, only: [:index]
     
+    #display a list of current users bugs
     def index
         if logged_in?
             bugs = current_user.bugs
             render json: {
                 bugs: BugSerializer.new(bugs),
                 status: 200,
-                success: "User Trip was obtained"}
+                success: "User Bugs was obtained"}
         else 
             render json: { message: "Please log in to see bugs"}, status: 500
         end
     end
-
-    def user_params
-        params.require(:bug).permit(:title, :description, :user, :project, :status, :priority)
-    end
-
+    
+    #display current users bug
     def show
         bug = current_user.bugs
         render json: {
@@ -56,6 +52,11 @@ class Api::V1::BugsController < ApplicationController
     def set_bug
         trip = Trip.find(params[:id])
     end
+
+    def bug_params
+        params.require(:bug).permit(:title, :description, :user, :project, :status, :priority)
+    end
+
 
 end
 

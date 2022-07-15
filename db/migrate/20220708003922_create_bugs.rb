@@ -6,7 +6,7 @@ class CreateBugs < ActiveRecord::Migration[6.1]
       t.string :status 
       t.string :priority 
       t.references :user, polymorphic: true, index: true
-      t.references :project,polymorphic: true, index: true
+      # t.references :project,polymorphic: true, index: true
 
       t.timestamps
     end

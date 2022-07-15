@@ -1,8 +1,8 @@
 class Api::V1::BugsController < ApplicationController
-    
+    before_action :set_bug, only: [:show, :update, :destroy]
+
     # display a list of current users bugs
     def index
-        bugs = Bugs.all 
         if logged_in?
             bugs = current_user.bugs
             render json: {
@@ -24,6 +24,7 @@ class Api::V1::BugsController < ApplicationController
 
 
     def create 
+
         bug = current_user.bugs.build(bug_params)
 
         if bug.save 
@@ -33,12 +34,13 @@ class Api::V1::BugsController < ApplicationController
         else 
             render json: {
                 error: bug.errors.full_messages,
-                status: unprocessable_entity}
+                status: :unprocessable_entity}
         end
     end
 
     def update 
-        if bug.update(trip_params)
+    
+        if bug.update(bug_params)
             render json: {bug: BugSerializer.new(bug)}
         else 
             render json: {
@@ -47,7 +49,7 @@ class Api::V1::BugsController < ApplicationController
         end
     end
 
-    def delete 
+    def destroy 
         bug.destroy 
         render json: {message: "bug was destroyed"}
     end
@@ -57,7 +59,7 @@ class Api::V1::BugsController < ApplicationController
     end
 
     def bug_params
-        params.require(:bug).permit(:title, :description, :user, :project, :status, :priority)
+        params.require(:bug).permit(:title, :description, :user, :status, :priority)
     end
 
 

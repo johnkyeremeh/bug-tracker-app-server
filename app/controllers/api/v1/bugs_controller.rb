@@ -16,7 +16,7 @@ class Api::V1::BugsController < ApplicationController
     
     #display current users bug
     def show
-        bug = current_user.bug
+        bug = Bug.find(params[:id])
         render json: {
             bug: BugSerializer.new(bug),
             success: "Bug was rendered"}
@@ -39,7 +39,7 @@ class Api::V1::BugsController < ApplicationController
     end
 
     def update 
-    
+        bug = Bug.find(params[:id])
         if bug.update(bug_params)
             render json: {bug: BugSerializer.new(bug)}
         else 
@@ -50,10 +50,12 @@ class Api::V1::BugsController < ApplicationController
     end
 
     def destroy 
+        bug = Bug.find(params[:id])
         bug.destroy 
         render json: {message: "bug was destroyed"}
     end
 
+    #before action set_bug not working 
     def set_bug
         bug = Bug.find(params[:id])
     end

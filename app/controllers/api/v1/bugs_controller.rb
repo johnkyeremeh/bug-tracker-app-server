@@ -1,7 +1,8 @@
 class Api::V1::BugsController < ApplicationController
     
-    #display a list of current users bugs
+    # display a list of current users bugs
     def index
+        bugs = Bugs.all 
         if logged_in?
             bugs = current_user.bugs
             render json: {
@@ -15,18 +16,20 @@ class Api::V1::BugsController < ApplicationController
     
     #display current users bug
     def show
-        bug = current_user.bugs
+        bug = current_user.bug
         render json: {
-            bug: BugSerializer.new(bugs),
+            bug: BugSerializer.new(bug),
             success: "Bug was rendered"}
     end
 
 
     def create 
-        bug = Bug.new(bug_params)
+        bug = current_user.bugs.build(bug_params)
 
         if bug.save 
-            render json: {bug: BugSerializer.new(bug), success: "New bug was created"}
+            render json: {
+                bug: BugSerializer.new(bug),
+                success: "New bug was created"}
         else 
             render json: {
                 error: bug.errors.full_messages,
@@ -41,16 +44,16 @@ class Api::V1::BugsController < ApplicationController
             render json: {
                 error: bug.errors.full_messages,
                 status: unprocessable_entity}
-                
         end
     end
 
     def delete 
         bug.destroy 
+        render json: {message: "bug was destroyed"}
     end
 
     def set_bug
-        trip = Trip.find(params[:id])
+        bug = Bug.find(params[:id])
     end
 
     def bug_params

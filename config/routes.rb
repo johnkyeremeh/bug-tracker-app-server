@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get '/dashboard', to: 'static#home'
 
   #signup
-  post '/api/v1/signup', to: 'api/v1/sessions#create'
+  post '/api/v1/signup', to: 'api/v1/users#create'
 
   #login
   post '/api/v1/login', to: 'api/v1/sessions#create'
@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :bugs
-      resources :users, only: [:index, :create]
+      resources :users
       resources :projects
       resources :bugs
     end

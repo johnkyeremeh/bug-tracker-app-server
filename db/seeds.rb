@@ -35,6 +35,6 @@ user3 = User.create(username: "Call", password: "password", email: "test3@email.
 # project3 = Project.create(title: "Desktop", description: "Desktop", user: user1)
 
 
-bug1 = Bug.create(title: "Mobile View Broken", description: "Sample Description", user: user1,  status: "Open", priority: "Low")
-bug2 = Bug.create(title: "Mobile  ", description: "sdfdsfdsfdsfs f sdf", user: user1,  status: "Open", priority: "Medium")
-bug3 = Bug.create(title: "Msadsan", description: "Tdsfdsfdsfdes dsfdsfdsfdt", user: user1,  status: "Open", priority: "High")
+bug1 = Bug.create(summary: "Sample Description", description: "Lorem Lorem Lorem Lorem Loren Loren Loren", user: user1,  status: "Open", priority: "Low")
+bug2 = Bug.create(summary: "sdfdsfdsfdsfs f sdf",  description: "Lorem Lorem Lorem Lorem Loren Loren Loren", user: user1,  status: "Open", priority: "Medium")
+bug3 = Bug.create(summary: "Tdsfdsfdsfdes dsfdsfdsfdt", description: "Lorem Lorem Lorem Lorem Loren Loren Loren", user: user1,  status: "Open", priority: "High")

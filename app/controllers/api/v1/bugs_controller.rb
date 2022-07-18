@@ -24,7 +24,7 @@ class Api::V1::BugsController < ApplicationController
 
 
     def create 
-
+        byebug
         bug = current_user.bugs.build(bug_params)
 
         if bug.save 
@@ -61,7 +61,7 @@ class Api::V1::BugsController < ApplicationController
     end
 
     def bug_params
-        params.require(:bug).permit(:title, :description, :user, :status, :priority)
+        params.require(:bug).permit(:summary, :description, :user, :status, :priority)
     end
 
 

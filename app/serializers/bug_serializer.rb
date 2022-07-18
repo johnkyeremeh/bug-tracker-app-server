@@ -1,6 +1,6 @@
 class BugSerializer 
   include FastJsonapi::ObjectSerializer
-  attributes :title, :description, :status, :priority
+  attributes :summary, :description, :status, :priority, :user,  :created_at
 
   # belongs_to :project, serializer: ProjectSerializer
   belongs_to :user, serializer: UserSerializer

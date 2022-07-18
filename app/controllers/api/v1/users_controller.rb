@@ -1,7 +1,6 @@
 class Api::V1::UsersController < ApplicationController
 
-    # skip_before_action :authorized, only: [:signup]
-    # skip_before_action :authorized, only: [:index]
+
 
     #delete me later
     def index
@@ -10,18 +9,16 @@ class Api::V1::UsersController < ApplicationController
     end
 
 
-    def signup 
-    
+    def create 
         user = User.new(user_params)
         
         #if user is saved then render message and user 
         if user.save
-            payload = {user_id: user.id }
-            token = encode_token(payload)
+            session[:user_id] = user.id
             render json: {
                 status: :created,
                 user: UserSerializer.new(user),
-                jwt: token
+                sucess: "Welcome to bugtracker app"
             }
         else 
             render json: { errors: user.errors.full_messages}, status: 500
@@ -32,7 +29,7 @@ class Api::V1::UsersController < ApplicationController
     private
   
     def user_params
-      params.require(:user).permit(:username, :email, :password)
+      params.permit(:username, :email, :password)
     end
 
 end

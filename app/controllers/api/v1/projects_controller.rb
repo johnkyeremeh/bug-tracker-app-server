@@ -3,43 +3,81 @@ class Api::V1::ProjectsController < ApplicationController
     # skip_before_action :authorized, only: [:index]
         #delete me later
         def index
-            #is there an incoming user_id
-            #but does that matter? do we always want just the current users projects
-         
-                
-                render json: Project.all
-          
-            # else 
-            #     render json: { message: "You must be in logged in to see your bugs"}, status: 500
-            # end
+            
+            if logged_in?
+                projects = current_user.projects
+                render json: {
+                    projects: ProjectSerializer.new(projects),
+                    status: 200,
+                    success: "User Projects were obtained"}
+            else 
+                render json: { message: "Please log in to see your projects"}, status: 500
+            end
             
         end
-    
-    
-        def signup 
-        
-            user = User.new(user_params)
-            user_json =  UserSerializer.new(user).serializable_hash
-    
-            
-            #if user is saved then render message and user 
-            if user.save
-                payload = {user_id: user.id }
-                token = encode_token(payload)
+
+        def all_projects 
+            if logged_in?
+                projects = Project.all
                 render json: {
-                    status: :created,
-                    user: user_json,
-                    jwt: token}
+                    projects: ProjectSerializer.new(projects),
+                    status: 200,
+                    success: "All projects were obtained"}
             else 
-                render json: { errors: user.errors.full_messages}, status: 500
+                render json: { message: "Please log in to see all projects"}, status: 500
             end
         end
-        
-      
-        private
-      
-        def user_params
-          params.require(:user).permit(:username, :email, :password)
+    
+    
+        def show
+            
+            project = Project.find(params[:id])
+            render json: {
+                project: ProjectSerializer.new(project),
+                success: "Project was rendered"}
+        end
+    
+    
+        def create 
+            
+            project = current_user.projects.build(project_params)
+    
+            if project.save 
+                render json: {
+                    project: ProjectSerializer.new(project),
+                    success: "New project was created"}
+            else 
+                render json: {
+                    error: project.errors.full_messages,
+                    status: :unprocessable_entity}
+            end
+        end
+    
+        def update 
+            
+            project = Project.find(params[:id])
+            if project.update(project_params)
+                render json: {project: ProjectSerializer.new(project)}
+            else 
+                render json: {
+                    error: project.errors.full_messages,
+                    status: unprocessable_entity}
+            end
+        end
+    
+        def destroy 
+            
+            project = Project.find(params[:id])
+            project.destroy 
+            render json: {message: "project was destroyed"}
+        end
+    
+        #before action set_project not working 
+        def set_project
+            project = Project.find(params[:id])
+        end
+        def project_params
+            params.require(:project).permit(:title, :description, :user)
         end
 
 

@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-
+  
 
 
     #delete me later
@@ -10,6 +10,7 @@ class Api::V1::UsersController < ApplicationController
 
 
     def create 
+        byebug
         user = User.new(user_params)
         
         #if user is saved then render message and user 
@@ -23,13 +24,14 @@ class Api::V1::UsersController < ApplicationController
         else 
             render json: { errors: user.errors.full_messages}, status: 500
         end
+        byebug
     end
     
   
     private
   
     def user_params
-      params.permit(:username, :email, :password)
+      params.permit(:user, :username, :email, :password)
     end
 
 end

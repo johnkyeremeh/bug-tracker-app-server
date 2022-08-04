@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   #Set Current User
   get "/api/v1/get_current_user", to: "api/v1/sessions#get_current_user"
 
-  root 'static#home'
+  root 'welcome#index'
 
   #all projects
   get "/api/v1/all_projects", to: "api/v1/projects#all_projects"

@@ -55,6 +55,7 @@ class Api::V1::ProjectsController < ApplicationController
     
         def update 
             
+            
             project = Project.find(params[:id])
             if project.update(project_params)
                 render json: {project: ProjectSerializer.new(project)}

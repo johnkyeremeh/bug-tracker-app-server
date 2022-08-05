@@ -15,6 +15,8 @@ Rails.application.configure do
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local = false
 
+  #turn this to true for debuging above.
+
   config.action_dispatch.cookies_same_site_protection = :None
 
   # Ensures that a master key has been made available in either ENV["RAILS_MASTER_KEY"]

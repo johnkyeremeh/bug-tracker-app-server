@@ -3,7 +3,6 @@ class Api::V1::ProjectsController < ApplicationController
     # skip_before_action :authorized, only: [:index]
         #delete me later
         def index
-            
             if logged_in?
                 projects = current_user.projects
                 render json: {

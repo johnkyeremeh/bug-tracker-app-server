@@ -10,6 +10,7 @@ class Api::V1::UsersController < ApplicationController
 
 
     def create 
+        
         user = User.new(user_params)
         
         #if user is saved then render message and user 

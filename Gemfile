@@ -26,6 +26,8 @@ gem 'bootsnap', '>= 1.4.4', require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
 
+gem 'rails_same_site_cookie', '~> 0.1.8'
+
 
 
 group :development, :test do
@@ -61,4 +63,3 @@ gem "figaro"
 #serializer
 gem 'fast_jsonapi'
 
-gem 'rails_same_site_cookie'

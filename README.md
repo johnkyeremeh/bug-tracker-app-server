@@ -54,7 +54,7 @@
   
   Click the below video for more details:
 
-  Video Link Explainer: https://share.vidyard.com/watch/HeSePaCcccj6LR9ZRnoN4X?
+  Video Demo: https://share.vidyard.com/watch/HeSePaCcccj6LR9ZRnoN4X?
 
   Link to frontend: https://github.com/johnkyeremeh/bug-tracker-client
 
